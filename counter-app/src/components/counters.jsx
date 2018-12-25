@@ -7,26 +7,24 @@ import Counter from './counter';
 
 class Counters extends Component {
 
-	state = {
-		counters: [
-			{ id: 1, value: 1},
-			{ id: 2, value: 0},
-			{ id: 3, value: 2},
-			{ id: 4, value: 3}
-		]
-	}
+	//destructuring allows us to remove this.props accordingly, making code cleaner
 
 	render() {
+		const { onReset, counters, onDelete, onIncrement } = this.props;
+
 		return (
-			<div>
-					{ this.state.counters.map(counter =>  
+			<div>	
+				<button 
+					onClick={onReset}
+					className="btn btn-primary btn-sm m-2">Reset</button>
+					{counters.map(counter =>  
 						(<Counter 
 						key={counter.id}
-						value={counter.value}>
-							<h4>Counter #{counter.id}</h4>
-						</Counter>)
-
-					)}
+						onDelete={onDelete}
+						onIncrement={onIncrement}
+						counter={counter}
+						/>
+						))}
 			</div>
 			)
 	}
